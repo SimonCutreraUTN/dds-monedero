@@ -48,7 +48,7 @@ public class Cuenta { //large class
     if (cuanto > limite) {
       throw new MaximoExtraccionDiarioException(
           "No puede extraer mas de $ " + 1000 + " diarios, " + "límite: " + limite);
-    }
+    } //shotgun surgery
     new Movimiento(LocalDate.now(), cuanto, false).agregateA(this);
   } //long method
 
