@@ -25,7 +25,7 @@ public class Movimiento {
   }
 
   public boolean fueDepositado(LocalDate fecha) {
-    return isDeposito() && esDeLaFecha(fecha);
+    return getDeposito() && esDeLaFecha(fecha);
   }
 
   public boolean fueExtraido(LocalDate fecha) {
@@ -36,9 +36,7 @@ public class Movimiento {
     return this.fecha.equals(fecha);
   }
 
-  public boolean isDeposito() {
-    return esDeposito;
-  } //misplaced methods
+  public boolean getDeposito() { return esDeposito; }
 
   public boolean isExtraccion() {
     return !esDeposito;
