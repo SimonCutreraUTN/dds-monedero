@@ -8,7 +8,7 @@ public class Movimiento {
   // En su lugar siempre usen numeros de precision arbitraria o punto fijo, como BigDecimal en Java y similares
   // De todas formas, NO es necesario modificar ésto como parte de este ejercicio. 
   private double monto;
-  private boolean esDeposito;
+  private boolean esDeposito; //primitive obsession
 
   public Movimiento(LocalDate fecha, double monto, boolean esDeposito) {
     this.fecha = fecha;
@@ -30,7 +30,7 @@ public class Movimiento {
 
   public boolean fueExtraido(LocalDate fecha) {
     return isExtraccion() && esDeLaFecha(fecha);
-  }
+  }//duplicated code
 
   public boolean esDeLaFecha(LocalDate fecha) {
     return this.fecha.equals(fecha);
@@ -38,22 +38,22 @@ public class Movimiento {
 
   public boolean isDeposito() {
     return esDeposito;
-  }
+  } //misplaced methods
 
   public boolean isExtraccion() {
     return !esDeposito;
-  }
+  } //duplicated code
 
   public void agregateA(Cuenta cuenta) {
     cuenta.setSaldo(calcularValor(cuenta));
     cuenta.agregarMovimiento(fecha, monto, esDeposito);
-  }
+  } //feature envy
 
-  public double calcularValor(Cuenta cuenta) {
+  public double calcularValor(Cuenta cuenta) { //divergent change
     if (esDeposito) {
       return cuenta.getSaldo() + getMonto();
     } else {
-      return cuenta.getSaldo() - getMonto();
+      return cuenta.getSaldo() - getMonto(); //duplicated code
     }
   }
 }

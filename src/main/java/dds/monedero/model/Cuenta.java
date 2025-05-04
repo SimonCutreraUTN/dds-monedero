@@ -9,9 +9,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cuenta {
+public class Cuenta { //large class
 
-  private double saldo = 0;
+  private double saldo = 0; //primitive obsession
   private List<Movimiento> movimientos = new ArrayList<>();
 
   public Cuenta() {
@@ -33,8 +33,8 @@ public class Cuenta {
       throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
     }
 
-    new Movimiento(LocalDate.now(), cuanto, true).agregateA(this);
-  }
+    new Movimiento(LocalDate.now(), cuanto, true).agregateA(this); //message chain
+  } //long method
 
   public void sacar(double cuanto) {
     if (cuanto <= 0) {
@@ -50,12 +50,12 @@ public class Cuenta {
           "No puede extraer mas de $ " + 1000 + " diarios, " + "límite: " + limite);
     }
     new Movimiento(LocalDate.now(), cuanto, false).agregateA(this);
-  }
+  } //long method
 
   public void agregarMovimiento(LocalDate fecha, double cuanto, boolean esDeposito) {
     var movimiento = new Movimiento(fecha, cuanto, esDeposito);
     movimientos.add(movimiento);
-  }
+  } //long parameters list
 
   public double getMontoExtraidoA(LocalDate fecha) {
     return getMovimientos().stream()
