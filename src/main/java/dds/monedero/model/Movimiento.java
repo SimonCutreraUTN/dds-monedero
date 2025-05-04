@@ -54,10 +54,6 @@ public class Movimiento {
   }
 
   public double operarSegunTipo() {
-    if (tipo == tipoDeMov.EXTRACCION) { //type test
-      return -1;
-    } else {
-      return 1;
-    }
+    return tipo.factor();
   }
 }
