@@ -29,11 +29,11 @@ public class Movimiento {
   }
 
   public boolean fueDepositado(LocalDate fecha) {
-    return getTipoDeposito() && esDeLaFecha(fecha);
+    return verificarTipo(tipoDeMov.DEPOSITO) && esDeLaFecha(fecha);
   }
 
   public boolean fueExtraido(LocalDate fecha) {
-    return isExtraccion() && esDeLaFecha(fecha);
+    return verificarTipo(tipoDeMov.EXTRACCION) && esDeLaFecha(fecha);
   }//duplicated code
 
 
@@ -41,13 +41,13 @@ public class Movimiento {
     return this.fecha.equals(fecha);
   }
 
+  public boolean verificarTipo(tipoDeMov tipo) {
+    return this.tipo.equals(tipo);
+  }
+
   public boolean getTipoDeposito() {
     return tipo == tipoDeMov.DEPOSITO;
   }
-
-  public boolean isExtraccion() {
-    return tipo == tipoDeMov.EXTRACCION;
-  } //duplicated code
 
   public double calcularValor(Cuenta cuenta) { //divergent change
     return cuenta.getSaldo() + (operarSegunTipo() * getMonto());

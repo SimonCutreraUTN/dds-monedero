@@ -135,8 +135,8 @@ public class MonederoTest {
     cuenta.sacar(1000);
     Movimiento movimientoDeposito = cuenta.getMovimientos().get(0);
     Movimiento movimientoExtraccion = cuenta.getMovimientos().get(1);
-    assertTrue(movimientoDeposito.getTipoDeposito());
-    assertTrue(movimientoExtraccion.isExtraccion());
+    assertTrue(movimientoDeposito.verificarTipo(tipoDeMov.DEPOSITO));
+    assertTrue(movimientoExtraccion.verificarTipo(tipoDeMov.EXTRACCION));
   }
 
   @Test
