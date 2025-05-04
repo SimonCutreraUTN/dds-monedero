@@ -23,6 +23,12 @@ public class Cuenta { //large class
   }
 
   public void poner(double cuanto) {
+    verificarPoner(cuanto);
+    Movimiento movimiento = new Movimiento(LocalDate.now(), cuanto, tipoDeMov.DEPOSITO); //long parameter list
+    agregarMovimiento(movimiento);
+  } //long method
+
+  public void verificarPoner(double cuanto) {
     if (cuanto <= 0) {
       throw new MontoNegativoException(cuanto + ": el monto a ingresar debe ser un valor positivo");
     }
@@ -32,10 +38,7 @@ public class Cuenta { //large class
         .count() >= 3) { //shotgun surgery
       throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
     }
-
-    Movimiento movimiento = new Movimiento(LocalDate.now(), cuanto, tipoDeMov.DEPOSITO); //long parameter list
-    agregarMovimiento(movimiento);
-  } //long method
+  }
 
   public void sacar(double cuanto) {
     verificarSacar(cuanto);
