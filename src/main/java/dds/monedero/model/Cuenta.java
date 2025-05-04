@@ -33,7 +33,8 @@ public class Cuenta { //large class
       throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
     }
 
-    new Movimiento(LocalDate.now(), cuanto, tipoDeMov.DEPOSITO).agregateA(this); //message chain
+    Movimiento movimiento = new Movimiento(LocalDate.now(), cuanto, tipoDeMov.DEPOSITO); //message chain
+    agregarMovimiento(movimiento);
   } //long method
 
   public void sacar(double cuanto) {
@@ -49,7 +50,8 @@ public class Cuenta { //large class
       throw new MaximoExtraccionDiarioException(
           "No puede extraer mas de $ " + 1000 + " diarios, " + "límite: " + limite);
     } //shotgun surgery
-    new Movimiento(LocalDate.now(), cuanto, tipoDeMov.EXTRACCION).agregateA(this);
+    Movimiento movimiento = new Movimiento(LocalDate.now(), cuanto, tipoDeMov.EXTRACCION);
+    agregarMovimiento(movimiento);
   } //long method
 
   public void agregarMovimiento(LocalDate fecha, double cuanto, tipoDeMov tipo) {
@@ -63,6 +65,11 @@ public class Cuenta { //large class
         .mapToDouble(Movimiento::getMonto)
         .sum();
   }
+
+  public void agregarMovimiento(Movimiento movimiento) {
+    setSaldo(movimiento.calcularValor(this));
+    agregarMovimiento(movimiento.getFecha(), movimiento.getMonto(), movimiento.getTipo());
+  } //feature envy
 
   public List<Movimiento> getMovimientos() {
     return movimientos;

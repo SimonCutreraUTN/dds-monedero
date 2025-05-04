@@ -115,7 +115,7 @@ public class MonederoTest {
   void agregarMovimiento() {
     LocalDate fecha = LocalDate.of(2025, 1, 1);
     Movimiento movimiento = new Movimiento(fecha, 1000, tipoDeMov.DEPOSITO);
-    movimiento.agregateA(cuenta);
+    cuenta.agregarMovimiento(movimiento);
     assertEquals(1, cuenta.getMovimientos().size());
   }
 

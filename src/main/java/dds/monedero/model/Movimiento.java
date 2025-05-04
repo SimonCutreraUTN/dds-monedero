@@ -24,6 +24,10 @@ public class Movimiento {
     return fecha;
   }
 
+  public tipoDeMov getTipo() {
+    return tipo;
+  }
+
   public boolean fueDepositado(LocalDate fecha) {
     return getTipoDeposito() && esDeLaFecha(fecha);
   }
@@ -31,6 +35,7 @@ public class Movimiento {
   public boolean fueExtraido(LocalDate fecha) {
     return isExtraccion() && esDeLaFecha(fecha);
   }//duplicated code
+
 
   public boolean esDeLaFecha(LocalDate fecha) {
     return this.fecha.equals(fecha);
@@ -43,11 +48,6 @@ public class Movimiento {
   public boolean isExtraccion() {
     return tipo == tipoDeMov.EXTRACCION;
   } //duplicated code
-
-  public void agregateA(Cuenta cuenta) {
-    cuenta.setSaldo(calcularValor(cuenta));
-    cuenta.agregarMovimiento(fecha, monto, tipo);
-  } //feature envy
 
   public double calcularValor(Cuenta cuenta) { //divergent change
     if (tipo == tipoDeMov.DEPOSITO) { //type test
