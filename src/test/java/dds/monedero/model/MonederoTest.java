@@ -106,7 +106,7 @@ public class MonederoTest {
   @DisplayName("Se estima bien la fecha")
   void EstimaBienLaFecha() {
     LocalDate fecha = LocalDate.of(2025, 1, 1);
-    Movimiento movimiento = new Movimiento(fecha, 1000, true);
+    Movimiento movimiento = new Movimiento(fecha, 1000, tipoDeMov.DEPOSITO);
     assertTrue(movimiento.esDeLaFecha(fecha));
   }
 
@@ -114,7 +114,7 @@ public class MonederoTest {
   @DisplayName("Se puede agregar un movimiento a la cuenta")
   void agregarMovimiento() {
     LocalDate fecha = LocalDate.of(2025, 1, 1);
-    Movimiento movimiento = new Movimiento(fecha, 1000, true);
+    Movimiento movimiento = new Movimiento(fecha, 1000, tipoDeMov.DEPOSITO);
     movimiento.agregateA(cuenta);
     assertEquals(1, cuenta.getMovimientos().size());
   }
@@ -124,7 +124,7 @@ public class MonederoTest {
   void calculaCorrectamenteSaldo() {
     cuenta.poner(1500);
     LocalDate fecha = LocalDate.of(2025, 1, 1);
-    Movimiento movimiento = new Movimiento(fecha, 1000, true);
+    Movimiento movimiento = new Movimiento(fecha, 1000, tipoDeMov.DEPOSITO);
     assertEquals(2500, movimiento.calcularValor(cuenta));
   }
 
@@ -135,7 +135,7 @@ public class MonederoTest {
     cuenta.sacar(1000);
     Movimiento movimientoDeposito = cuenta.getMovimientos().get(0);
     Movimiento movimientoExtraccion = cuenta.getMovimientos().get(1);
-    assertTrue(movimientoDeposito.getDeposito());
+    assertTrue(movimientoDeposito.getTipoDeposito());
     assertTrue(movimientoExtraccion.isExtraccion());
   }
 
