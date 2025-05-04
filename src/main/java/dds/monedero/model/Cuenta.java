@@ -16,7 +16,7 @@ public class Cuenta { //large class
 
   public Cuenta() {
     saldo = 0;
-  }
+  } //duplicated code
 
   public Cuenta(double montoInicial) {
     saldo = montoInicial;
