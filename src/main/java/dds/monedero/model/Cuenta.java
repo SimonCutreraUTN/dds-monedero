@@ -38,6 +38,12 @@ public class Cuenta { //large class
   } //long method
 
   public void sacar(double cuanto) {
+    verificarSacar(cuanto);
+    Movimiento movimiento = new Movimiento(LocalDate.now(), cuanto, tipoDeMov.EXTRACCION);
+    agregarMovimiento(movimiento);
+  }
+
+  public void verificarSacar(double cuanto) {
     if (cuanto <= 0) {
       throw new MontoNegativoException(cuanto + ": el monto a ingresar debe ser un valor positivo");
     }
@@ -50,9 +56,7 @@ public class Cuenta { //large class
       throw new MaximoExtraccionDiarioException(
           "No puede extraer mas de $ " + 1000 + " diarios, " + "límite: " + limite);
     } //shotgun surgery
-    Movimiento movimiento = new Movimiento(LocalDate.now(), cuanto, tipoDeMov.EXTRACCION);
-    agregarMovimiento(movimiento);
-  } //long method
+  }
 
   public void agregarMovimiento(LocalDate fecha, double cuanto, tipoDeMov tipo) {
     var movimiento = new Movimiento(fecha, cuanto, tipo);
