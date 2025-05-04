@@ -1,7 +1,7 @@
 package dds.monedero.model;
 
 public class Saldo {
-  private double dinero = 0;
+  private double dinero;
 
   public Saldo(double dinero) {
     this.dinero = dinero;

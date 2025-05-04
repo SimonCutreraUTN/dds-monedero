@@ -8,6 +8,7 @@ import dds.monedero.exceptions.SaldoMenorException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.plaf.SliderUI;
 
 public class Cuenta { //large class
 
@@ -16,7 +17,7 @@ public class Cuenta { //large class
 
   public Cuenta() {
     saldo = new Saldo(0);
-  } //duplicated code
+  }
 
   public Cuenta(double montoInicial) {
     saldo = new Saldo(montoInicial);
@@ -26,7 +27,7 @@ public class Cuenta { //large class
     verificarPoner(cuanto);
     Movimiento movimiento = new Movimiento(LocalDate.now(), cuanto, tipoDeMov.DEPOSITO); //long parameter list
     agregarMovimiento(movimiento);
-  } //long method
+  }
 
   public void verificarPoner(double cuanto) {
     if (cuanto <= 0) {
