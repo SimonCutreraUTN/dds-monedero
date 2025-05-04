@@ -11,15 +11,15 @@ import java.util.List;
 
 public class Cuenta { //large class
 
-  private double saldo = 0; //primitive obsession
+  private Saldo saldo;
   private List<Movimiento> movimientos = new ArrayList<>();
 
   public Cuenta() {
-    saldo = 0;
+    saldo = new Saldo(0);
   } //duplicated code
 
   public Cuenta(double montoInicial) {
-    saldo = montoInicial;
+    saldo = new Saldo(montoInicial);
   }
 
   public void poner(double cuanto) {
@@ -69,7 +69,7 @@ public class Cuenta { //large class
   public void agregarMovimiento(Movimiento movimiento) {
     setSaldo(movimiento.calcularValor(this));
     agregarMovimiento(movimiento.getFecha(), movimiento.getMonto(), movimiento.getTipo());
-  } //feature envy
+  }
 
   public List<Movimiento> getMovimientos() {
     return movimientos;
@@ -80,11 +80,11 @@ public class Cuenta { //large class
   }
 
   public double getSaldo() {
-    return saldo;
+    return saldo.getSaldo();
   }
 
-  public void setSaldo(double saldo) {
-    this.saldo = saldo;
+  public void setSaldo(double dinero) {
+    saldo.setSaldo(dinero);
   }
 
 }
