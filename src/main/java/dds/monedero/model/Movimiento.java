@@ -29,13 +29,16 @@ public class Movimiento {
   }
 
   public boolean fueDepositado(LocalDate fecha) {
-    return verificarTipo(tipoDeMov.DEPOSITO) && esDeLaFecha(fecha);
+    return tipoYFecha(tipoDeMov.DEPOSITO, fecha);
   }
 
   public boolean fueExtraido(LocalDate fecha) {
-    return verificarTipo(tipoDeMov.EXTRACCION) && esDeLaFecha(fecha);
-  }//duplicated code
+    return tipoYFecha(tipoDeMov.EXTRACCION, fecha);
+  }
 
+  public boolean tipoYFecha(tipoDeMov tipo, LocalDate fecha) {
+    return verificarTipo(tipo) && esDeLaFecha(fecha);
+  }
 
   public boolean esDeLaFecha(LocalDate fecha) {
     return this.fecha.equals(fecha);
