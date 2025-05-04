@@ -50,7 +50,7 @@ public class Movimiento {
   } //feature envy
 
   public double calcularValor(Cuenta cuenta) { //divergent change
-    if (esDeposito) {
+    if (esDeposito) { //type test
       return cuenta.getSaldo() + getMonto();
     } else {
       return cuenta.getSaldo() - getMonto(); //duplicated code
