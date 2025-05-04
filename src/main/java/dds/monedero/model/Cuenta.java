@@ -29,7 +29,7 @@ public class Cuenta { //large class
 
     if (getMovimientos().stream()
         .filter(movimiento -> movimiento.fueDepositado(LocalDate.now()))
-        .count() >= 3) {
+        .count() >= 3) { //shotgun surgery
       throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
     }
 
