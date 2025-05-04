@@ -45,10 +45,6 @@ public class Movimiento {
     return this.tipo.equals(tipo);
   }
 
-  public boolean getTipoDeposito() {
-    return tipo == tipoDeMov.DEPOSITO;
-  }
-
   public double calcularValor(Cuenta cuenta) { //divergent change
     return cuenta.getSaldo() + (operarSegunTipo() * getMonto());
   }
