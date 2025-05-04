@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MonederoTest {
@@ -22,11 +23,12 @@ public class MonederoTest {
   @DisplayName("Es posible poner $1500 en una cuenta vacía")
   void Poner() {
     cuenta.poner(1500);
+    assertEquals(1500, cuenta.getSaldo());
   }
 
   @Test
   @DisplayName("No es posible poner montos negativos")
-  void PonerMontoNegativo() {
+  void NoSePuedePonerMontoNegativo() {
     assertThrows(MontoNegativoException.class, () -> cuenta.poner(-1500));
   }
 
@@ -36,11 +38,12 @@ public class MonederoTest {
     cuenta.poner(1500);
     cuenta.poner(456);
     cuenta.poner(1900);
+    assertEquals(3, cuenta.getMovimientos().size());
   }
 
   @Test
   @DisplayName("No es posible superar la máxima cantidad de depositos diarios")
-  void MasDeTresDepositos() {
+  void MaximoTresDepositos() {
     assertThrows(MaximaCantidadDepositosException.class, () -> {
       cuenta.poner(1500);
       cuenta.poner(456);
@@ -51,16 +54,16 @@ public class MonederoTest {
 
   @Test
   @DisplayName("No es posible extraer más que el saldo disponible")
-  void ExtraerMasQueElSaldo() {
+  void NoSePuedeExtraerMasQueElSaldo() {
     assertThrows(SaldoMenorException.class, () -> {
       cuenta.setSaldo(90);
-      cuenta.sacar(1001);
+      cuenta.sacar(91);
     });
   }
 
   @Test
   @DisplayName("No es posible extraer más que el límite diario")
-  void ExtraerMasDe1000() {
+  void NoSePuedeExtraerMasDeLimite() {
     assertThrows(MaximoExtraccionDiarioException.class, () -> {
       cuenta.setSaldo(5000);
       cuenta.sacar(1001);
