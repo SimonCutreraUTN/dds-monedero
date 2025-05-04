@@ -33,7 +33,7 @@ public class Cuenta { //large class
       throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
     }
 
-    Movimiento movimiento = new Movimiento(LocalDate.now(), cuanto, tipoDeMov.DEPOSITO); //message chain
+    Movimiento movimiento = new Movimiento(LocalDate.now(), cuanto, tipoDeMov.DEPOSITO); //long parameter list
     agregarMovimiento(movimiento);
   } //long method
 
