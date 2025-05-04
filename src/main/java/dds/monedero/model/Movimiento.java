@@ -50,10 +50,14 @@ public class Movimiento {
   } //duplicated code
 
   public double calcularValor(Cuenta cuenta) { //divergent change
-    if (tipo == tipoDeMov.DEPOSITO) { //type test
-      return cuenta.getSaldo() + getMonto();
+    return cuenta.getSaldo() + (operarSegunTipo() * getMonto());
+  }
+
+  public double operarSegunTipo() {
+    if (tipo == tipoDeMov.EXTRACCION) { //type test
+      return -1;
     } else {
-      return cuenta.getSaldo() - getMonto(); //duplicated code
+      return 1;
     }
   }
 }

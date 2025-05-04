@@ -8,7 +8,6 @@ import dds.monedero.exceptions.SaldoMenorException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.plaf.SliderUI;
 
 public class Cuenta { //large class
 
