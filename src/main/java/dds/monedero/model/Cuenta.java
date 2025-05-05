@@ -68,7 +68,7 @@ public class Cuenta { //large class
 
   public double getMontoExtraidoA(LocalDate fecha) {
     return getMovimientos().stream()
-        .filter(movimiento -> !movimiento.verificarTipo(tipoDeMov.DEPOSITO) && movimiento.getFecha().equals(fecha)) //message chain
+        .filter(movimiento -> movimiento.fueExtraido(fecha))
         .mapToDouble(Movimiento::getMonto)
         .sum();
   }
