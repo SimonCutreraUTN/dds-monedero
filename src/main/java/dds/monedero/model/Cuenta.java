@@ -57,12 +57,19 @@ public class Cuenta { //large class
     if (getSaldo() - cuanto < 0) {
       throw new SaldoMenorException("No puede sacar mas de " + getSaldo() + " $");
     }
-    var montoExtraidoHoy = getMontoExtraidoA(LocalDate.now());
-    var limite = 1000 - montoExtraidoHoy;
-    if (cuanto > limite) {
+    if (verificarExtraccionDiario(cuanto)) {
       throw new MaximoExtraccionDiarioException(
-          "No puede extraer mas de $ " + 1000 + " diarios, " + "límite: " + limite);
-    } //shotgun surgery
+          "No puede extraer mas de $ " + 1000 + " diarios, " + "límite: " + getLimite()
+      );
+    }
+  }
+
+  public boolean verificarExtraccionDiario(double cuanto) {
+    return cuanto > getLimite();
+  }
+
+  public double getLimite() {
+    return 1000 - getMontoExtraidoA(LocalDate.now());
   }
 
   public void agregarMovimientoALista(Movimiento movimiento) {
