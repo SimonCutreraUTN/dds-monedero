@@ -33,11 +33,15 @@ public class Cuenta { //large class
       throw new MontoNegativoException(cuanto + ": el monto a ingresar debe ser un valor positivo");
     }
 
-    if (getMovimientos().stream()
-        .filter(movimiento -> movimiento.fueDepositado(LocalDate.now()))
-        .count() >= 3) { //shotgun surgery
+    if (verificarCantidadDepositos()) {
       throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
     }
+  }
+
+  public boolean verificarCantidadDepositos() {
+    return getMovimientos().stream()
+        .filter(movimiento -> movimiento.fueDepositado(LocalDate.now()))
+        .count() >= 3;
   }
 
   public void sacar(double cuanto) {
@@ -93,7 +97,7 @@ public class Cuenta { //large class
     saldo.setSaldo(dinero);
   }
 
-  public double calcularValor(Movimiento movimiento) { //divergent change
+  public double calcularValor(Movimiento movimiento) {
     return this.getSaldo() + movimiento.calcularAgregado();
   }
 
