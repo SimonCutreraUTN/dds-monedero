@@ -61,10 +61,9 @@ public class Cuenta { //large class
     } //shotgun surgery
   }
 
-  public void agregarMovimiento(LocalDate fecha, double cuanto, tipoDeMov tipo) {
-    var movimiento = new Movimiento(fecha, cuanto, tipo);
+  public void agregarMovimientoALista(Movimiento movimiento) {
     movimientos.add(movimiento);
-  } //long parameters list
+  }
 
   public double getMontoExtraidoA(LocalDate fecha) {
     return getMovimientos().stream()
@@ -75,7 +74,7 @@ public class Cuenta { //large class
 
   public void agregarMovimiento(Movimiento movimiento) {
     setSaldo(movimiento.calcularValor(this));
-    agregarMovimiento(movimiento.getFecha(), movimiento.getMonto(), movimiento.getTipo());
+    agregarMovimientoALista(movimiento);
   }
 
   public List<Movimiento> getMovimientos() {
