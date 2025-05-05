@@ -28,6 +28,10 @@ public class Movimiento {
     return tipo;
   }
 
+  public double calcularAgregado() {
+    return operarSegunTipo() * getMonto();
+  }
+
   public boolean fueDepositado(LocalDate fecha) {
     return tipoYFecha(tipoDeMov.DEPOSITO, fecha);
   }
@@ -46,10 +50,6 @@ public class Movimiento {
 
   public boolean verificarTipo(tipoDeMov tipo) {
     return this.tipo.equals(tipo);
-  }
-
-  public double calcularValor(Cuenta cuenta) { //divergent change
-    return cuenta.getSaldo() + (operarSegunTipo() * getMonto());
   }
 
   public double operarSegunTipo() {

@@ -73,7 +73,7 @@ public class Cuenta { //large class
   }
 
   public void agregarMovimiento(Movimiento movimiento) {
-    setSaldo(movimiento.calcularValor(this));
+    setSaldo(calcularValor(movimiento));
     agregarMovimientoALista(movimiento);
   }
 
@@ -91,6 +91,10 @@ public class Cuenta { //large class
 
   public void setSaldo(double dinero) {
     saldo.setSaldo(dinero);
+  }
+
+  public double calcularValor(Movimiento movimiento) { //divergent change
+    return this.getSaldo() + movimiento.calcularAgregado();
   }
 
 }
