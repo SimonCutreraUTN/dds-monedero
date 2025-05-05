@@ -13,6 +13,7 @@ public class Cuenta { //large class
 
   private Saldo saldo;
   private List<Movimiento> movimientos = new ArrayList<>();
+  private Restricciones restriccion = new Restricciones(3, 1000);
 
   public Cuenta() {
     saldo = new Saldo(0);
@@ -20,6 +21,11 @@ public class Cuenta { //large class
 
   public Cuenta(double montoInicial) {
     saldo = new Saldo(montoInicial);
+  }
+
+  public void setRestriccion(int limiteDepositos, double extraccionesMonto) {
+    restriccion.setLimiteDepositos(limiteDepositos);
+    restriccion.setLimiteMontoExtracciones(extraccionesMonto);
   }
 
   public void poner(double cuanto) {
@@ -41,7 +47,7 @@ public class Cuenta { //large class
   public boolean verificarCantidadDepositos() {
     return getMovimientos().stream()
         .filter(movimiento -> movimiento.fueDepositado(LocalDate.now()))
-        .count() >= 3;
+        .count() >= restriccion.getLimiteDepositos();
   }
 
   public void sacar(double cuanto) {
@@ -59,7 +65,7 @@ public class Cuenta { //large class
     }
     if (verificarExtraccionDiario(cuanto)) {
       throw new MaximoExtraccionDiarioException(
-          "No puede extraer mas de $ " + 1000 + " diarios, " + "límite: " + getLimite()
+          "No puede extraer mas de $ " + restriccion.getLimiteMontoExtracciones() + " diarios, " + "límite: " + getLimite()
       );
     }
   }
@@ -69,7 +75,7 @@ public class Cuenta { //large class
   }
 
   public double getLimite() {
-    return 1000 - getMontoExtraidoA(LocalDate.now());
+    return restriccion.getLimiteMontoExtracciones() - getMontoExtraidoA(LocalDate.now());
   }
 
   public void agregarMovimientoALista(Movimiento movimiento) {
