@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cuenta { //large class
+public class Cuenta {
 
   private Saldo saldo;
   private List<Movimiento> movimientos = new ArrayList<>();
@@ -65,17 +65,17 @@ public class Cuenta { //large class
     }
     if (verificarExtraccionDiario(cuanto)) {
       throw new MaximoExtraccionDiarioException(
-          "No puede extraer mas de $ " + restriccion.getLimiteMontoExtracciones() + " diarios, " + "límite: " + getLimite()
+          "No puede extraer mas de $ " + restriccion.getLimiteMontoExtracciones() + " diarios, " + "límite: " + restriccion.getLimiteActual(montoDeHoy())
       );
     }
   }
 
   public boolean verificarExtraccionDiario(double cuanto) {
-    return cuanto > getLimite();
+    return cuanto > restriccion.getLimiteActual(montoDeHoy());
   }
 
-  public double getLimite() {
-    return restriccion.getLimiteMontoExtracciones() - getMontoExtraidoA(LocalDate.now());
+  private double montoDeHoy() {
+    return getMontoExtraidoA(LocalDate.now());
   }
 
   public void agregarMovimientoALista(Movimiento movimiento) {
@@ -90,7 +90,7 @@ public class Cuenta { //large class
   }
 
   public void agregarMovimiento(Movimiento movimiento) {
-    setSaldo(calcularValor(movimiento));
+    saldo.modificarPorMovimiento(movimiento);
     agregarMovimientoALista(movimiento);
   }
 
@@ -108,10 +108,6 @@ public class Cuenta { //large class
 
   public void setSaldo(double dinero) {
     saldo.setSaldo(dinero);
-  }
-
-  public double calcularValor(Movimiento movimiento) {
-    return this.getSaldo() + movimiento.calcularAgregado();
   }
 
 }

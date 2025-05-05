@@ -26,4 +26,8 @@ public class Restricciones {
   public void setLimiteDepositos(int limiteDepositos) {
     this.limiteDepositos = limiteDepositos;
   }
+
+  public double getLimiteActual(double valorExtraido) {
+    return getLimiteMontoExtracciones() - valorExtraido;
+  }
 }
