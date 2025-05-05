@@ -34,7 +34,7 @@ public class Cuenta {
     agregarMovimiento(movimiento);
   }
 
-  public void verificarPoner(double cuanto) {
+  private void verificarPoner(double cuanto) {
     if (cuanto <= 0) {
       throw new MontoNegativoException(cuanto + ": el monto a ingresar debe ser un valor positivo");
     }
@@ -44,7 +44,7 @@ public class Cuenta {
     }
   }
 
-  public boolean verificarCantidadDepositos() {
+  private boolean verificarCantidadDepositos() {
     return getMovimientos().stream()
         .filter(movimiento -> movimiento.fueDepositado(LocalDate.now()))
         .count() >= restriccion.getLimiteDepositos();
@@ -56,7 +56,7 @@ public class Cuenta {
     agregarMovimiento(movimiento);
   }
 
-  public void verificarSacar(double cuanto) {
+  private void verificarSacar(double cuanto) {
     if (cuanto <= 0) {
       throw new MontoNegativoException(cuanto + ": el monto a ingresar debe ser un valor positivo");
     }
@@ -70,7 +70,7 @@ public class Cuenta {
     }
   }
 
-  public boolean verificarExtraccionDiario(double cuanto) {
+  private boolean verificarExtraccionDiario(double cuanto) {
     return cuanto > restriccion.getLimiteActual(montoDeHoy());
   }
 
@@ -78,7 +78,7 @@ public class Cuenta {
     return getMontoExtraidoA(LocalDate.now());
   }
 
-  public void agregarMovimientoALista(Movimiento movimiento) {
+  private void agregarMovimientoALista(Movimiento movimiento) {
     movimientos.add(movimiento);
   }
 

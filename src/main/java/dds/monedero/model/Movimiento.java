@@ -40,7 +40,7 @@ public class Movimiento {
     return tipoYFecha(tipoDeMov.EXTRACCION, fecha);
   }
 
-  public boolean tipoYFecha(tipoDeMov tipo, LocalDate fecha) {
+  private boolean tipoYFecha(tipoDeMov tipo, LocalDate fecha) {
     return verificarTipo(tipo) && esDeLaFecha(fecha);
   }
 
@@ -52,7 +52,7 @@ public class Movimiento {
     return this.tipo.equals(tipo);
   }
 
-  public double operarSegunTipo() {
+  private double operarSegunTipo() {
     return tipo.factor();
   }
 }
